@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import blogs from "../data/blogsdata";
 
 
 export default function Home() {
@@ -59,78 +60,33 @@ export default function Home() {
         <h2 className="text-4xl font-bold font-serif text-left mb-10 text-black ml-20">Latest Blogs</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mr-20 ml-20">
           {/* Blog Post 1 */}
-          <div className="bg-white  overflow-hidden">
-            <Image
-              src="/images/b1.png" 
-              alt="Blog 1"
-              width={500}
-              height={300}
-              className="w-full h-56 object-cover"
-            />
+             {blogs.map((blog)=>(
+              <div key={blog.myblog} className="bg-white overflow-hidden">
+                <Image
+                  src={blog.image}
+                  alt={blog.title}
+                  width={500}
+                  height={300}
+                  className="w-full h-56 object-cover"
+                />
             <div className="p-6">
-              <h3 className="text-2xl font-bold text-black">Garlic Butter White Wine Shrimp</h3>
+              <h3 className="text-2xl font-bold text-black">{blog.title}</h3>
               <p className="text-gray-500 mt-4">
-                Commodo labore Lorem consequat et.Commodo labore Lorem consequat et.
+                {blog.content.substring(0,60)}...
               </p>
+              <Link href={`/blogs/${blog.myblog}`}>
               <button className="text-amber-700 hover:text-amber-900 mt-6 border border-amber-700 p-2">
                 Read More
               </button>
+              </Link>
             </div>
           </div>
-          {/* Blog Post 2 */}
-          <div className="bg-white   overflow-hidden">
-            <Image
-              src="/images/b2.png" 
-              alt="Blog 2"
-              width={500}
-              height={300}
-              className="w-full h-56 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-2xl font-bold text-black">Grilled Flank Steak with Chimichurri</h3>
-              <p className="text-gray-500 mt-4">
-              Commodo labore Lorem consequat et.Commodo labore Lorem consequat et.
-              </p>
-              <button className="text-amber-700 hover:text-amber-900 mt-6 border border-amber-700 p-2">
-                Read More
-              </button>
-            </div>
-          </div>
-          {/* Blog Post 3 */}
-          <div className="bg-white   overflow-hidden">
-            <Image
-              src="/images/b3.png" 
-              alt="Blog 3"
-              width={500}
-              height={300}
-              className="w-full h-56 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-2xl font-bold text-black">Mushroom Penne with Walnut Pesto</h3>
-              <p className="text-gray-500 mt-4">
-              Commodo labore Lorem consequat et.Commodo labore Lorem consequat et.
-              </p>
-              <button className="text-amber-700 hover:text-amber-900 mt-6 border border-amber-700 p-2">
-                Read More
-              </button>
-            </div>
-          </div>
+          ))}
+          
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-black text-white py-8">
-        <div className="container mx-auto text-center">
-          <p className="text-sm">
-            &copy; 2024 Dianna Adams. All rights reserved.
-          </p>
-          <div className="flex justify-center space-x-6 mt-4">
-            <a href="#" className="text-amber-700 hover:text-amber-500">Facebook</a>
-            <a href="#" className="text-amber-700 hover:text-amber-500">Twitter</a>
-            <a href="#" className="text-amber-700 hover:text-amber-500">Instagram</a>
-          </div>
-        </div>
-      </footer>
+     
     </div>
   );
 }
